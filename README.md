@@ -43,6 +43,7 @@ It is not an standalone desktop app, nor does it have a GUI. `edge-pdf` should b
 ![File explorer image 1](docs/installation-file-explorer-1.png)
 
 4. Check `Always use this app to open .pdf files`, scroll down and click `More apps`, scroll down again and click `Look for another app on this PC`
+
 ![File explorer image 2](docs/installation-file-explorer-2.png)
 ![File explorer image 3](docs/installation-file-explorer-3.png)
 
