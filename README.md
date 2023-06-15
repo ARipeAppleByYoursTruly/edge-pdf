@@ -18,7 +18,7 @@ Opened using MS Edge
 Opened using `edge-pdf`
 
 ## How Does It Work?
-`edge-pdf` simply executes the command line `start msedge --app=<filepath-to-pdf-file>`, where `<filepath-to-pdf-file>` is the PDF file that you choose to `Open With edge-pdf.exe`.
+`edge-pdf` simply executes the command line `start msedge "--app=<filepath-to-pdf-file> --inprivate --start-maximized"`, where `<filepath-to-pdf-file>` is the PDF file that you choose to `Open With edge-pdf.exe`. I've also added `--inprivate` so that the browser's history won't be filled by all of the PDF files you've opened, and `--start-maximized` to maximize the window automatically when opening a file.
 
 It is not an standalone desktop app, nor does it have a GUI. `edge-pdf` should be thought of as a shortcut to execute the command line stated above, but in the executable (.exe) format so users can configure `edge-pdf.exe` as the default program to open PDF files.
 
@@ -27,7 +27,7 @@ It is not an standalone desktop app, nor does it have a GUI. `edge-pdf` should b
 1. You're using a Windows PC
 
    If you're on different OS, and dead set on using MS Edge as the default PDF Editor, you can try:
-   - Building the "app" yourself using the `src` folder (which requires some knowledge on programming using Python), or
+   - Building the "app" yourself using the `src` folder, which requires some knowledge on programming using Python and PyInstaller, or
    - Use an external program to run `edge-pdf.exe`
 
 2. You have MS Edge installed
@@ -51,3 +51,7 @@ It is not an standalone desktop app, nor does it have a GUI. `edge-pdf` should b
 ![File explorer image 4](docs/installation-file-explorer-4.png)
 
 6. If MS Edge opens your .pdf file, then you have successfully installed `edge-pdf`
+
+## Some Details to Take Note of
+- Every time you open a PDF file using `edge-pdf`, you will see a seperate window that appears very briefly before closing itself. Expect this to be a normal behavior for the forseeable future.
+- Filepaths, not just filenames, with non-ASCII characters are not supported. This is to prevent URL-encoded filepaths from getting too long and hit the length limits of both the command line and the browser URL.
