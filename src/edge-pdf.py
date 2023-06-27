@@ -1,4 +1,5 @@
 import sys, os, subprocess
+from urllib.parse import quote
 from tkinter import messagebox
 
 def main():
@@ -11,58 +12,32 @@ def main():
 
 
 
-    fileToOpen: str = sys.argv[1]
+    filepath: str = sys.argv[1]
 
-    if not os.path.isfile(fileToOpen):
-        showFileOpenError(fileToOpen, "File does not exist.")
+    if not os.path.isfile(filepath):
+        showFileOpenError(filepath, "File does not exist.")
 
-    if not fileToOpen.lower().endswith(".pdf"):
-        showFileOpenError(fileToOpen, "edge-pdf.exe can only open PDF files.")
-
-    if not isFilepathAsciiCharactersOnly(fileToOpen):
-        showFileOpenError(fileToOpen, "Filepath contains non-ASCII characters, please rename the file and try again.")
+    if not filepath.lower().endswith(".pdf"):
+        showFileOpenError(filepath, "edge-pdf.exe can only open PDF files.")
 
 
 
-
-    edgeArgumentList: str = f'"--app=`"{createEncodedURL(fileToOpen)}`" --inprivate --start-maximized"'
+    edgeArgumentList: str = f'"--app=`"{convertToUrl(filepath)}`" --start-maximized"'
 
     subprocess.run(["powershell", "start", "msedge", edgeArgumentList])
 
 
 
-def isFilepathAsciiCharactersOnly(filepath: str) -> bool:
-    for ch in filepath:
-        if ord(ch) not in range(32, 128):
-            return False
-
-    return True
-
-
-
-def createEncodedURL(filepath: str) -> str:
+def convertToUrl(filepath: str) -> str:
     # Windows does not allow these characters in filenames
     # \ / : * ? " < > |
 
-    url = filepath.replace("%", "%25") # Must encode '%' first
-    url = filepath.replace(" ", "%20")
-    url = filepath.replace("!", "%21")
-    url = filepath.replace("#", "%23")
-    url = filepath.replace("$", "%24")
-    url = filepath.replace("&", "%26")
-    url = filepath.replace("'", "%27")
-    url = filepath.replace("(", "%28")
-    url = filepath.replace(")", "%29")
-    url = filepath.replace("*", "%2A")
-    url = filepath.replace("+", "%2B")
-    url = filepath.replace(",", "%2C")
-    url = filepath.replace(";", "%3B")
-    url = filepath.replace("=", "%3D")
-    url = filepath.replace("@", "%40")
-    url = filepath.replace("[", "%5B")
-    url = filepath.replace("]", "%5D")
+    # So I'm assuming filenames will never contain them
 
-    return url
+
+
+    # '\' is not allowed in f-strings
+    return quote(filepath, "/:\\")
 
 
 
