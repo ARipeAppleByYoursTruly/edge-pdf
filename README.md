@@ -52,6 +52,13 @@ It is not an standalone desktop app, nor does it have a GUI. `edge-pdf` should b
 
 6. If MS Edge opens your .pdf file, then you have successfully installed `edge-pdf`
 
+## Updating `edge-pdf`
+
+Simply override the old files with the new files.
+
 ## Some Details to Take Note of
 - Every time you open a PDF file using `edge-pdf`, you will see a seperate window that appears very briefly before closing itself. Expect this to be a normal behavior for the forseeable future.
-- Filepaths, not just filenames, with non-ASCII characters are not supported. This is to prevent URL-encoded filepaths from getting too long and hit the length limits of both the command line and the browser URL.
+- Filepaths that are 2000 characters or more will be automatically abbreviated by Windows to `...~1/...~1.pdf`. If this behavior bothers you, consider:
+  - Renaming the pdf file, or
+  - Move the pdf file to another location that are only a few folders deep
+- If you moved `edge-pdf` to another location, you have to do step 3 to 6 of the installation again.
