@@ -80,4 +80,4 @@ Simply override the old files with the new files.
 
 ## Attributions
 
-PDF icon by [Joe Roe at Wikipedia](https://commons.wikimedia.org/w/index.php?curid=109826599)
+PDF icon by [Joe Roe at Wikimedia Commons](https://commons.wikimedia.org/w/index.php?curid=109826599)
