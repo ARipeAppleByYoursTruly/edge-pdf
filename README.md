@@ -14,6 +14,7 @@ If the last point somewhat fits your description and you've stumbled upon here, 
 `edge-pdf` is an executable that opens .pdf files with MS Edge in application/app mode, which hides the browser's toolbar. To my knowledge, app mode is actually used to prevent users from using MS Edge to browse the web. But that works in my favor, as I intent to use MS Edge for opening PDF files only.
 
 Here's a comparison shot of opening a PDF file using MS Edge vs `edge-pdf`:
+
 ![A PDF file opened using MS Edge](docs/comparison-msedge.png)
 Opened using MS Edge
 
