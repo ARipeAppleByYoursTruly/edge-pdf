@@ -43,7 +43,7 @@ It is not an standalone desktop app, nor does it have a GUI. `edge-pdf` should b
 
 ### Step-By-Step
 
-1.  Download and extract `edge-pdf.zip` to your desired location
+1.  Download and extract `edge-pdf.zip` from the [Releases](https://github.com/ARipeAppleByYoursTruly/edge-pdf/releases) section of this repo to your desired location
 2.  Open Microsoft Edge, go to `Settings > Cookies and site permissions`, scroll down and click `PDF documents`, and turn off `Always download PDF files`
 
 ![MS Edge settings image 1](docs/installation-msedge-settings-1.jpeg)
