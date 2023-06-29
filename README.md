@@ -23,7 +23,7 @@ Opened using `edge-pdf`
 
 ## How Does It Work?
 
-`edge-pdf` simply executes the command line `start msedge "--app=<filepath-to-pdf-file> --inprivate --start-maximized"`, where `<filepath-to-pdf-file>` is the PDF file that you choose to `Open With edge-pdf.exe`. I've also added `--inprivate` so that the browser's history won't be filled by all of the PDF files you've opened, and `--start-maximized` to maximize the window automatically when opening a file.
+`edge-pdf` simply executes the command line `start msedge "--app=<filepath-to-pdf-file> --start-maximized"`, where `<filepath-to-pdf-file>` is the PDF file that you choose to `Open With edge-pdf.exe`. I've added `--start-maximized` to maximize the window automatically when opening a file.
 
 It is not an standalone desktop app, nor does it have a GUI. `edge-pdf` should be thought of as a shortcut to execute the command line stated above, but in the executable (.exe) format so users can configure `edge-pdf.exe` as the default program to open PDF files.
 
