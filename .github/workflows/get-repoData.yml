@@ -8,7 +8,9 @@ run-name: Getting repo data for personal website
 
 # Events that trigger this workflow
 on:
-  push
+  push:
+    branches:
+      - "**"
 
 
 
