@@ -1,0 +1,120 @@
+# The name of this workflow
+name: get-repoData
+
+# Descriptive text for this workflow
+run-name: Getting repo data for personal website
+
+
+
+# Events that trigger this workflow
+on:
+  push
+
+
+
+# Jobs of this workflow
+jobs:
+  # Name of this job
+  get-repoData-from-restApi:
+    # Specify the OS this job will run on
+    runs-on: ubuntu-latest
+    # Set permissions for this job
+    permissions:
+      contents: write
+    # Steps of this job
+    steps:
+      # Name of this step
+      - name: Calling GitHub REST API
+        # This step is using a pre-existing action as a function call
+        uses: actions/github-script@v7.0.1
+        # Similar to passing parameters to a function
+        with:
+          script: |
+            // Get data of this repo
+            const ownerName = context.repo.owner
+            const repoName = context.repo.repo
+
+            const api_response = await github.rest.repos.get({
+              owner: ownerName,
+              repo: repoName
+            })
+
+
+
+            // Only need specific properties of api_response.data
+            let repoData = {
+              name: api_response.data.name,
+              description: api_response.data.description,
+              lastPushedAt: api_response.data.pushed_at,
+              url_repo: api_response.data.html_url,
+              url_thumbnail: ""
+            }
+
+            if (repoData.description === null) {
+              repoData.description = ""
+            }
+
+
+
+            // Get thumbnail of this repo
+            const thumbnail_url = `https://raw.githubusercontent.com/${ownerName}/${repoName}` +
+              "/for-personal-website/thumbnail.webp"
+            let thumbnail_response = false
+
+            try {
+              thumbnail_response = await fetch(thumbnail_url)
+
+              if (thumbnail_response.ok) {
+                repoData.url_thumbnail = thumbnail_url
+              }
+            }
+            catch (error) {}
+
+
+
+            // Check if repoData.json already exists
+            const repoData_filepath = "repoData.json"
+            const branchName = "for-personal-website"
+            let repoData_sha = ""
+            let repoData_response = false
+
+            try {
+              repoData_response = await github.rest.repos.getContent({
+                owner: ownerName,
+                repo: repoName,
+                path: repoData_filepath,
+                ref: branchName
+              })
+
+              if (repoData_response.status === 200) {
+                repoData_sha = repoData_response.data.sha
+              }
+            }
+            catch (error) {}
+
+
+
+            // Write repoData to file
+            const repoData_json = btoa(JSON.stringify(repoData, null, 2))
+
+            if (repoData.sha !== "") {
+              github.rest.repos.createOrUpdateFileContents({
+                owner: ownerName,
+                repo: repoName,
+                branch: branchName,
+                path: repoData_filepath,
+                sha: repoData_sha,
+                message: "Update repoData.json for personal website",
+                content: repoData_json
+              })
+            }
+            else {
+              github.rest.repos.createOrUpdateFileContents({
+                owner: ownerName,
+                repo: repoName,
+                branch: branchname,
+                path: repoData_filepath,
+                message: "Create repoData.json for personal website",
+                content: repoData_json
+              })
+            }
