@@ -10,7 +10,8 @@ run-name: Getting repo data for personal website
 on:
   push:
     branches:
-      - "**"
+      - "main"
+      - "for-personal-website"
 
 
 
